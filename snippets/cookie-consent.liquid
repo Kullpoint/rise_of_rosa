@@ -1,0 +1,24 @@
+<script>
+function feedback() {
+  const p = window.Shopify.customerPrivacy;
+  console.log(`Tracking ${p.userCanBeTracked() ? "en" : "dis"}abled`);
+}
+window.Shopify.loadFeatures(
+  [
+    {
+      name: "consent-tracking-api",
+      version: "0.1",
+    },
+  ],
+  function (error) {
+    if (error) throw error;
+    window.Shopify.customerPrivacy.setTrackingConsent(false, feedback);
+  }
+);
+window.addEventListener("CookiebotOnConsentReady", function () {
+  const tracking = !Cookiebot.declined;
+  if (window.Shopify.customerPrivacy) {
+    window.Shopify.customerPrivacy.setTrackingConsent(tracking, feedback);
+  }
+});
+</script>

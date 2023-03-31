@@ -1,0 +1,78 @@
+<section class="section-iwc">
+    <div class="section-iwc__wrapper">
+        {% if collection.metafields.custom.gallery_title %}
+            <h2 class="section-iwc__title">{{ collection.metafields.custom.gallery_title }}</h2>
+        {% else if section.settings.section-title %}
+            <h2 class="section-iwc__title">{{ section.settings.section-title }}</h2>
+        {% endif %}
+        {% if collection.metafields.custom.gallery_description %}
+            <div class="section-iwc__description">{{ collection.metafields.custom.gallery_description }}</div>
+        {% elsif section.settings.section-description %}
+            <div class="section-iwc__description">{{ section.settings.section-description }}</div>
+        {% endif %}
+        <div class="section-iwc__collage">
+            {% for block in section.blocks %}
+                {% if block.settings.item-image != blank %}
+                    <div class="iwc-item">
+                        <img src="{{ block.settings.item-image | image_url }}" alt="collage-item" width="auto" height="auto" loading="lazy" class="iwc-image">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% if section.settings.section-link-url %}
+            <a href="{{ section.settings.section-link-url }}" class="section-iwc__link">
+                {{ section.settings.section-link-title }}
+                {% render 'x-icon-chevron-right' %}
+            </a>
+        {% endif %}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Info with collage",
+        "settings": [
+            {
+                "type": "text",
+                "id": "section-title",
+                "label": "Title"
+            },
+            {
+                "type": "textarea",
+                "id": "section-description",
+                "label": "Description"
+            },
+            {
+                "type": "text",
+                "id": "section-link-title",
+                "label": "Link title"
+            },
+            {
+                "type": "url",
+                "id": "section-link-url",
+                "label": "Link url"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "collage item",
+                "type": "block",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "item-image",
+                        "label": "Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Info with collage",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}

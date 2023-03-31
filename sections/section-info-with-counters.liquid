@@ -1,0 +1,70 @@
+<section class="section-iwf">
+    <div class="section-iwf__wrapper">
+        <h2 class="section-iwf__title">{{ section.settings.section-title }}</h2>
+        <div class="section-iwf__counters">
+            {% for block in section.blocks %}
+                <div class="iwf-item">
+                    {% if block.settings.item-counter != blank %}
+                        <div class="iwf-counter">{{ block.settings.item-counter }}</div>
+                        <div class="iwf-line"></div>
+                    {% endif %}
+                    {% if block.settings.item-title != blank %}
+                        <div class="iwf-title">{{ block.settings.item-title }}</div>
+                    {% endif %}
+                    {% if block.settings.item-link-url != blank %}
+                        <a href="{{ block.settings.item-link-url }}" class="iwf-link">{{ block.settings.item-link-title }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Info with counters",
+        "settings": [
+            {
+                "type": "text",
+                "id": "section-title",
+                "label": "Title"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "counter item",
+                "type": "block",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "item-counter",
+                        "label": "Counter"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item-title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item-link-title",
+                        "label": "Link title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "item-link-url",
+                        "label": "Link url"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Info with counters",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}

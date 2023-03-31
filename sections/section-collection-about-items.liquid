@@ -1,0 +1,61 @@
+{% if collection.metafields.custom.about_item_title_1 != blank %}
+    <section class="section-cai">
+        <div class="section-cai__wrapper">
+            {% for item in (1..3) %}
+                {% assign aboutItemTitle = 'about_item_title_' | append: item %}
+                {% assign aboutItemContentImage = 'about_item_content_image_' | append: item %}
+                {% assign aboutItemContentText = 'about_item_content_text_' | append: item %}
+                {% if collection.metafields.custom[aboutItemTitle] != blank %}
+                    <div class="cai-item" data-collection-list-item>
+                        <div class="cai-item__title" data-list-title>
+                            {{ collection.metafields.custom[aboutItemTitle] }}
+                            {% render 'x-icon-chevron-down' %}
+                        </div>
+                        <div class="cai-item__content">
+                            <div class="cai-content__inner">
+                                {% if collection.metafields.custom[aboutItemContentImage] %}
+                                    <img src="{{ collection.metafields.custom[aboutItemContentImage] | image_url }}" alt="content image" width="auto" height="auto" class="cai-content__image">
+                                {% endif %}
+                                {% if collection.metafields.custom[aboutItemContentText] %}
+                                    <div class="cai-content__text">{{ collection.metafields.custom.about_item_content_text_1 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="cai-content__line"></div>
+                        </div>  
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <script type="module">
+        const listItemsOpener = (items) => {
+            for (const item of items) {
+                const title = item.querySelector("[data-list-title]");
+
+                title.addEventListener("click" ,() => {
+                    if (item.classList.contains("active")) {
+                        for (const i of items) {
+                            i.classList.remove("active");
+                        }
+                    }
+                    else {
+                        for (const i of items) {
+                            i.classList.remove("active");
+                        }
+                        item.classList.add("active")
+                    }
+                });
+            }
+        }
+
+        //async loading for not important JS files
+        document.addEventListener("DOMContentLoaded", () => {
+            const productListItems = document.querySelectorAll("[data-collection-list-item]");
+
+            if (productListItems) {
+                listItemsOpener(productListItems);
+            }
+        });
+    </script>
+{% endif %}

@@ -1,0 +1,43 @@
+<section class="section-lb">
+    <div class="section-lb__wrapper">
+        {% for block in section.blocks %}
+            <a href="{{ block.settings.link-url }}" class="section-lb__link">
+                <span>{{ block.settings.link-title }}</span>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Link buttons section",
+        "settings": [
+        ],
+        "blocks": [
+            {
+                "name": "button",
+                "type": "block",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "link-title",
+                        "label": "Link title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url",
+                        "label": "Link url"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Link buttons section",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}

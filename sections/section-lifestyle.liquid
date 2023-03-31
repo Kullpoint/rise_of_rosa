@@ -1,0 +1,141 @@
+<section class="section-lifestyle">
+    <div class="section-lifestyle__wrapper">
+        {% for block in section.blocks %}
+            <div class="section-lifestyle__block">
+                <div>
+                    <div class="title">{{ block.settings.title }}</div>
+                    <div class="subtitle">{{ block.settings.subtitle }}</div>
+                </div>
+                <div class="links">
+                    {% for item in (1..4) %}
+                        {% assign linkTitle = 'link-title-' | append: item %}
+                        {% assign linkUrl = 'link-url-' | append: item %}
+                        {% assign linkIcon = 'link-icon-' | append: item %}
+                        {% if block.settings[linkUrl] %}
+                            <a href="{{ block.settings[linkUrl] }}" class="link {% if block.settings[linkIcon] != blank %}iconed{% else %}default{% endif %}">
+                                {% if block.settings[linkIcon] %}
+                                    {{ block.settings[linkIcon] }}
+                                {% endif %}
+                                {{ block.settings[linkTitle] }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if block.settings.link-url %}
+                    <a href="{{ block.settings.link-url }}" class="main-link">{{ block.settings.link-title }}</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Lifestyle section",
+        "settings": [
+        ],
+        "blocks": [
+            {
+                "name": "Block",
+                "type": "block",
+                "limit": 2,
+                "settings": [
+                    {
+                        "type": "textarea",
+                        "id": "title",
+                        "label": "Title",
+                        "info": "Use <br> to break the line"
+                    },
+                    {
+                        "type": "textarea",
+                        "id": "subtitle",
+                        "label": "Subtitle",
+                        "info": "Use <br> to break the line"
+                    },
+                    {
+                        "type": "text",
+                        "id": "link-title",
+                        "label": "Main link title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url",
+                        "label": "Main link url"
+                    },
+                    {
+                        "type": "text",
+                        "id": "link-title-1",
+                        "label": "Link 1 title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url-1",
+                        "label": "Link 1 url"
+                    },
+                    {
+                        "type": "html",
+                        "id": "link-icon-1",
+                        "label": "Link 1 icon",
+                        "info": "Set only svg code here to show the icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "link-title-2",
+                        "label": "Link 2 title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url-2",
+                        "label": "Link 2 url"
+                    },
+                    {
+                        "type": "html",
+                        "id": "link-icon-2",
+                        "label": "Link 2 icon",
+                        "info": "Set only svg code here, to show the icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "link-title-3",
+                        "label": "Link 3 title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url-3",
+                        "label": "Link 3 url"
+                    },
+                    {
+                        "type": "html",
+                        "id": "link-icon-3",
+                        "label": "Link 3 icon",
+                        "info": "Set only svg code here, to show the icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "link-title-4",
+                        "label": "Link 4 title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url-4",
+                        "label": "Link 4 url"
+                    },
+                    {
+                        "type": "html",
+                        "id": "link-icon-4",
+                        "label": "Link 4 icon",
+                        "info": "Set only svg code here, to show the icon"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Lifestyle section",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}

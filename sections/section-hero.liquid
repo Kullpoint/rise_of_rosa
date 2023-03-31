@@ -1,0 +1,89 @@
+<section class="section-hero">
+    {% if section.settings.background-video.sources[1].url %}
+        <video class="section-hero__video" src="{{ section.settings.background-video.sources[1].url }}" playsinline loop autoplay muted preload></video>
+    {% else %}
+        <img src="{{ section.settings.background-image | image_url }}" width="auto" height="auto" class="section-hero__image">
+    {% endif %}
+    <div class="section-hero__wrapper">
+        <h2 class="section-hero__title">{{ section.settings.title }}</h2>
+        <h3 class="section-hero__subtitle">{{ section.settings.subtitle }}</h3>
+        <div class="section-hero__links">
+            {% for block in section.blocks %}
+                <a href="{{ block.settings.link-url }}" class="x-link {{ block.settings.link-variant }}">{{ block.settings.link-title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Hero section",
+        "settings": [
+            {
+                "type": "textarea",
+                "id": "title",
+                "label": "Title",
+                "info": "Use <br> to break the line"
+            },
+            {
+                "type": "textarea",
+                "id": "subtitle",
+                "label": "Subtitle",
+                "info": "Use <br> to break the line"
+            },
+            {
+                "type": "video",
+                "id": "background-video",
+                "label": "Video",
+                "info": "If video selected, then prefer him instead of image"
+            },
+            {
+                "type": "image_picker",
+                "id": "background-image",
+                "label": "Image"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Link",
+                "type": "block",
+                "limit": 2,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "link-title",
+                        "label": "Link title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link-url",
+                        "label": "Link url"
+                    },
+                    {
+                        "type": "select",
+                        "id": "link-variant",
+                        "options": [
+                            {
+                                "value": "blue",
+                                "label": "Blue"
+                            },
+                            {
+                                "value": "white",
+                                "label": "White"
+                            }
+                        ],
+                        "label": "Design variant"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Hero section",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}

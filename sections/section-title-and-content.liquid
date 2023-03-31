@@ -1,0 +1,40 @@
+<section class="section-tac">
+    <div class="section-tac__wrapper">
+        {% if collection.metafields.custom.title_title_and_content_section %}
+            <h2 class="section-tac__title">{{ collection.metafields.custom.title_title_and_content_section }}</h2>
+        {% elsif section.settings.section-title %}
+            <h2 class="section-tac__title">{{ section.settings.section-title }}</h2>
+        {% endif %}
+        {% if collection.description %}
+            <div class="section-tac__content">{{ collection.description }}</div>
+        {% elsif section.settings.section-content %}
+            <div class="section-tac__content">{{ section.settings.section-content }}</div>
+        {% endif %}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Title and content",
+        "settings": [
+            {
+                "type": "text",
+                "id": "section-title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "section-content",
+                "label": "Content"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Title and content",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}

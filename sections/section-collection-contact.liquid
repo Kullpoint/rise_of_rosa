@@ -1,0 +1,68 @@
+<section class="section-cc">
+    <div class="section-cc__wrapper">
+        <h2 class="section-cc__title">{{ section.settings.section-title }}</h2>
+        <div class="section-cc__container">
+            {% for block in section.blocks %}
+                <div class="cc-item">
+                    {% if block.settings.item-icon != blank %}
+                        {{ block.settings.item-icon }}
+                    {% endif %}
+                    <div class="cc-info">
+                        {% if block.settings.item-title != blank %}
+                            <div class="cc-title">{{ block.settings.item-title }}</div>
+                        {% endif %}
+                        {% if block.settings.item-text != blank %}
+                            <div class="cc-text">{{ block.settings.item-text }}</div>
+                        {% endif %}
+                    </div>
+                </div>  
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Contact section",
+        "settings": [
+            {
+                "type": "text",
+                "id": "section-title",
+                "label": "Title"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Info item",
+                "type": "block",
+                "settings": [
+                    {
+                        "type": "html",
+                        "id": "item-icon",
+                        "label": "Icon",
+                        "info": "Set only svg code here to show the icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "item-title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "textarea",
+                        "id": "item-text",
+                        "label": "Text",
+                        "info": "Use <br> to reak the line"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Contact section",
+                "settings": {
+
+                }
+            }
+        ]
+    }
+{% endschema %}
